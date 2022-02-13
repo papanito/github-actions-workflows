@@ -33,8 +33,8 @@ jobs:
       - name: Publish workflows
         shell: bash
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "papanito@wyssmann.com"
+          git config --local user.name "GitHub Actions"
           git add .
           git commit -m "ci: updated workflows"
           git push
