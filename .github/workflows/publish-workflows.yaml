@@ -4,6 +4,7 @@ on:
     branches: [ 'develop',  'main' ]
     paths:
     - 'ansible-roles/**'
+  workflow_dispatch:
 
 jobs:
   publish-workflow-template:
