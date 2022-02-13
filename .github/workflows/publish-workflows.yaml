@@ -1,0 +1,31 @@
+name: Workflow Publisher
+on:
+  push:
+    branches: [ 'develop',  'main' ]
+    paths:
+    - 'ansible-roles/**'
+
+jobs:
+  publish-workflow-template:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target_repo: [ 'test-repo' ]
+    steps:
+      - name: Checkout Workflows
+        uses: actions/checkout@v2
+        with:
+          path: main
+      - name: Checkout target repo
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ github.repository_owner }}/${{ matrix.target_repo }}
+          path: ${{ matrix.target_repo }}
+          token: ${{ secrets.GH_TOKEN}}
+          ref: main
+      - name: Update workflows
+        shell: bash
+        run: |
+          mkdir -p .github/workflows/
+          cp ../main/ansible-roles/* .github/workflows/
+        working-directory: ./${{ matrix.target_repo }}
