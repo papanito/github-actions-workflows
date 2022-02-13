@@ -11,7 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        target_repo: [ 'test-repo' ]
+        target_repo: [
+          'ansible-role-cloudflared',
+          'ansible-role-crowdsec',
+          'papanito/ansible-role-rsyslog',
+          'ansible-role-diskmounter',
+          'ansible-role-systemd_notifiers',
+          'ansible-role-ttrss',
+          'ansible-role-backup',
+          'ansible-role-git'
+        ]
     steps:
       - name: Checkout Workflows
         uses: actions/checkout@v2
