@@ -29,3 +29,12 @@ jobs:
           mkdir -p .github/workflows/
           cp ../main/ansible-roles/* .github/workflows/
         working-directory: ./${{ matrix.target_repo }}
+      - name: Publish workflows
+        shell: bash
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "ci: updated workflows"
+          git push
+        working-directory: ./${{ matrix.target_repo }}
