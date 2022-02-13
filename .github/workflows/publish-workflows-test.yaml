@@ -1,4 +1,4 @@
-name: Workflow Publisher
+name: Workflow Publisher (test)
 on:
   push:
     branches: [ 'develop',  'main' ]
@@ -12,14 +12,7 @@ jobs:
     strategy:
       matrix:
         target_repo: [
-          'ansible-role-cloudflared',
-          'ansible-role-crowdsec',
-          'ansible-role-rsyslog',
-          'ansible-role-diskmounter',
-          'ansible-role-systemd_notifiers',
-          'ansible-role-ttrss',
-          'ansible-role-backup',
-          'ansible-role-git'
+          'ansible-role-test-repo'
         ]
     steps:
       - name: Checkout Workflows
