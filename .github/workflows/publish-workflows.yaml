@@ -48,3 +48,4 @@ jobs:
           git commit -m "ci: updated workflows"
           git push
         working-directory: ./${{ matrix.target_repo }}
+        continue-on-error: true
