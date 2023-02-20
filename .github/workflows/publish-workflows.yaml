@@ -1,7 +1,7 @@
 name: Workflow Publisher
 on:
   push:
-    branches: ['develop','main']
+    branches: ['develop', 'main']
     paths:
       - 'ansible-roles/**'
   workflow_dispatch:
@@ -50,3 +50,5 @@ jobs:
           commit_user_name: GitHub Actions
           repository: ./${{ matrix.target_repo }}
         continue-on-error: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN}}
