@@ -20,6 +20,10 @@ jobs:
           'ansible-role-backup',
           'ansible-role-git'
         ]
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write
     steps:
       - name: Checkout Workflows
         uses: actions/checkout@v3
@@ -45,5 +49,4 @@ jobs:
           commit_user_email: papanito@wyssmann.com
           commit_user_name: GitHub Actions
           repository: ./${{ matrix.target_repo }}
-          token: ${{ secrets.GH_TOKEN}}
         continue-on-error: false
