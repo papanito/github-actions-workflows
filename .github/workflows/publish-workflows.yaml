@@ -1,9 +1,9 @@
 name: Workflow Publisher
 on:
   push:
-    branches: [ 'develop',  'main' ]
+    branches: ['develop','main']
     paths:
-    - 'ansible-roles/**'
+      - 'ansible-roles/**'
   workflow_dispatch:
 
 jobs:
@@ -23,11 +23,11 @@ jobs:
         ]
     steps:
       - name: Checkout Workflows
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           path: main
       - name: Checkout target repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: ${{ github.repository_owner }}/${{ matrix.target_repo }}
           path: ${{ matrix.target_repo }}
