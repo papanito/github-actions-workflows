@@ -39,12 +39,11 @@ jobs:
           cp ../main/ansible-roles/* .github/workflows/
         working-directory: ./${{ matrix.target_repo }}
       - name: Publish workflows
-        shell: bash
-        run: |
-          git config --local user.email "papanito@wyssmann.com"
-          git config --local user.name "GitHub Actions"
-          git add .
-          git commit -m "ci: updated workflows"
-          git push
-        working-directory: ./${{ matrix.target_repo }}
-        continue-on-error: true
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: ci:update workflows
+          commit_user_email: papanito@wyssmann.com
+          commit_user_name: GitHub Actions
+          repository: ./${{ matrix.target_repo }}
+          token: ${{ secrets.GH_TOKEN}}
+        continue-on-error: false
