@@ -1,0 +1,12 @@
+name: Create release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  call-workflow-passing-data:
+    uses: papanito/github-actions-workflows/.github/workflows/ansible-roles-build.yml@main
+    secrets:
+      gh_token: ${{ secrets.GITHUB_TOKEN }}

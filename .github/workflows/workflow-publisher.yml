@@ -1,0 +1,44 @@
+name: Workflow Publisher
+on:
+  push:
+    branches: ['develop', 'main']
+    paths:
+      - 'ansible-roles/**'
+  workflow_dispatch:
+
+jobs:
+  publish-workflow-template:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target_repo: [
+          'ansible-role-cloudflared',
+          'ansible-role-crowdsec',
+          'ansible-role-diskmounter',
+          'ansible-role-systemd_notifiers',
+          'ansible-role-ttrss',
+          'ansible-role-backup',
+          'ansible-role-git'
+        ]
+    steps:
+      - name: Checkout target repo
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ github.repository_owner }}/${{ matrix.target_repo }}
+          path: ${{ matrix.target_repo }}
+          token: ${{ secrets.GH_TOKEN}}
+          ref: main
+      - name: Update workflows
+        shell: bash
+        run: |
+          mkdir -p .github/workflows/
+          cp ../main/ansible-roles/* .github/workflows/
+        working-directory: ./${{ matrix.target_repo }}
+      - name: Publish workflows
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: ci:update workflows
+          commit_user_email: papanito@wyssmann.com
+          commit_user_name: GitHub Actions
+          repository: ./${{ matrix.target_repo }}
+        continue-on-error: false

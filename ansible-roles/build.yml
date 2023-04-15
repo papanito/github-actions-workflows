@@ -1,0 +1,16 @@
+name: master and pr builds
+
+on:
+  push:
+    branches: 
+    - master
+  pull_request:
+    branches: 
+    - master
+  workflow_dispatch:
+
+jobs:
+  call-workflow-passing-data:
+    uses: papanito/github-actions-workflows/.github/workflows/ansible-roles-build.yml@main
+    secrets:
+      gh_token: ${{ secrets.GITHUB_TOKEN }}
