@@ -1,9 +1,9 @@
-name: Workflow Publisher
+name: Funding Publisher
 on:
   push:
     branches: ['develop', 'main']
     paths:
-      - 'ansible-roles/**'
+      - 'funding/**'
   workflow_dispatch:
 
 jobs:
@@ -12,6 +12,9 @@ jobs:
     strategy:
       matrix:
         target_repo: [
+          'cheats',
+          'free-dev-resources',
+          'atlantis-docker-image',
           'ansible-role-cloudflared',
           'ansible-role-crowdsec',
           'ansible-role-diskmounter',
@@ -36,12 +39,12 @@ jobs:
         shell: bash
         run: |
           mkdir -p .github/workflows/
-          cp ../main/ansible-roles/* .github/workflows/
+          cp ../main/funding/* .github/
         working-directory: ./${{ matrix.target_repo }}
       - name: Publish workflows
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "ci: update workflows"
+          commit_message: "ci: update funding info"
           commit_user_email: papanito@wyssmann.com
           commit_user_name: GitHub Actions
           repository: ./${{ matrix.target_repo }}
