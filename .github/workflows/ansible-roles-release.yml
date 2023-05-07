@@ -5,6 +5,8 @@ on:
     secrets:
       gh_token:
         required: true
+      galaxy_api_key:
+        required: true
 
 jobs:
   build:
@@ -83,5 +85,5 @@ jobs:
     - name: Publish Ansible role to Galaxy
       uses: robertdebock/galaxy-action@1.2.1
       with:
-        galaxy_api_key: ${{ secrets.ANSIBLE_GALAXY_APIKEY }}
+        galaxy_api_key: ${{ secrets.galaxy_api_key }}
 
