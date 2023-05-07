@@ -83,7 +83,6 @@ jobs:
     needs: create-release
     steps:
     - name: Publish Ansible role to Galaxy
-      uses: robertdebock/galaxy-action@1.2.1
+      uses: hspaans/ansible-galaxy-action@v1
       with:
-        galaxy_api_key: ${{ secrets.galaxy_api_key }}
-
+        api_key: ${{ secrets.galaxy_api_key }}
